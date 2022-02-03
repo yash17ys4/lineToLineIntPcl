@@ -48,9 +48,13 @@ std::pair <bool, pcl::PointXYZ> intersectionOfTwoLines(double x00, double y00, d
 	double z1 = z11 + _mu * (z10 - z11);
 	pcl::PointXYZ p1 (x1, y1, z1);
 
+	std::cout<<"Point are "<<p0<<" "<<p1<<std::endl;
+
 	// Calculating distance between the points
 	// Rejecting the intersection if distance is greater then threshold
 	double _delta = pcl::euclideanDistance(p0, p1);
+	std::cout<<"Point dist: "<<_delta<<std::endl;
+
 	if(_delta < _epsilon) {
 		return {true, p0};
 	} else {
@@ -100,6 +104,7 @@ int main(int argc, char *argv[]) {
 			bool doesIntersect = pcl::lineWithLineIntersection(line0, line1, pt, _epsilon);
 			pcl::PointXYZ ptFromPCL(pt(0), pt(1), pt(2));
 			std::cout<<"Test case #"<<t+1<<std::endl;
+			std::cout<<"Pt of intersection from pcl "<<ptFromPCL<<std::endl;
 			if(answer.first == true && doesIntersect == true) {
 				std::cout<<"Result from my solution "<<answer.second<<std::endl;
 				std::cout<<"Result from pcl's algo "<<ptFromPCL<<std::endl;
